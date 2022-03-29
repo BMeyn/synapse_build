@@ -42,7 +42,7 @@ if __name__ == '__main__':
         version=os.getenv('GITVERSION_SEMVER'),
         package_dir={'': 'src'},
         packages=find_packages('src', include=[
-            'demo*'
+            'synapse_build*'
         ]),
         long_description=long_description,
         long_description_content_type='text/markdown',

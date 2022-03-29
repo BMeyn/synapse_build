@@ -1,5 +1,3 @@
-# Synapse Build
-
 ![banner](https://BMeyn.github.io/synapse_build//docs/images/AD1DBBFE-7E67-4099-9E7E-DB013D45B93B.png)
 
 *****

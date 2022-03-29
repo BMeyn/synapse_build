@@ -1,27 +1,27 @@
-# My Project
+# Synapse Build
 
-![banner](https://BMeyn.github.io/temp_python_pkg//docs/images/project-banner.png)
+![banner](https://BMeyn.github.io/synapse_build//docs/images/project-banner.png)
 
 *****
 
-[![HitCount](https://hits.dwyl.com/BMeyn/temp_python_pkg.svg?style=flat-square)](http://hits.dwyl.com/BMeyn/temp_python_pkg)
-[![PyPI version](https://badge.fury.io/py/BMeyn.svg)](https://badge.fury.io/py/BMeyn)
-[![Tests Status](https://BMeyn.github.io/temp_python_pkg/docs/badget/unittest-badget.svg?dummy=8484744)]()
-[![Coverage Status](https://BMeyn.github.io/temp_python_pkg/docs/badget/coverage-badget.svg?dummy=8484744)]()
+[![HitCount](https://hits.dwyl.com/BMeyn/synapse_build.svg?style=flat-square)](http://hits.dwyl.com/BMeyn/synapse_build)
+[![PyPI version](https://badge.fury.io/py/synapse-build.svg)](https://badge.fury.io/py/synapse-build)
+[![Tests Status](https://BMeyn.github.io/synapse_build/docs/badget/unittest-badget.svg?dummy=8484744)]()
+[![Coverage Status](https://BMeyn.github.io/synapse_build/docs/badget/coverage-badget.svg?dummy=8484744)]()
 
 ## Features:
 
-  - Feature 1
+  - Build deployment files directly from the synapse artifact in git
 
-  - Feature 2
+  - Automate workspace publish button
 
-  - Feature 3
+  - Replace values with parameters in synapse json artifacts
 
 
 ## Install:
 
 ```
-pip install BMeyn
+pip install synapse-build
 ```
 
 ## Usage:

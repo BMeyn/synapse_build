@@ -5,5 +5,5 @@
 Full list of [Src](README.md#src-index) project modules.
 
 - [Src Index](README.md#src-index)
-- [Demo](demo/index.md#demo)
-    - [Main](demo/main.md#main)
+- [Synapse Build](synapse_build/index.md#synapse-build)
+    - [Main](synapse_build/main.md#main)

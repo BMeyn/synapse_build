@@ -1,11 +1,11 @@
 
 github_owner: "BMeyn"
-github_repo: "temp_python_pkg"
-project_name: "My Project"
-package_name: "BMeyn"
-package_description: "My project description"
+github_repo: "synapse_build"
+project_name: "Synapse Build"
+package_name: "synapse-build"
+package_description: "Automated build for synapse workspace artifacts"
 project_banner: "/docs/images/project-banner.png"
 project_feature: 
-    - "Feature 1"
-    - "Feature 2"
-    - "Feature 3"
+    - "Build deployment files directly from the synapse artifact in git"
+    - "Automate workspace publish button"
+    - "Replace values with parameters in synapse json artifacts"

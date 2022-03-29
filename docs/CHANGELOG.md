@@ -1,5 +1,6 @@
 # Release Notes 
 ## Pull Requests
-**49** removed duplicated txt ending in stup requirements
+**1** Feature/repo_setup
 ### Commits
-  - **27f1c7ba840077deb31592edf788bd108c513f24** removed duplicated txt ending in stup requirements
+  - **dc31e8831b6a6a344d0af5cbafa226957dc61c94** configured template repo
+  - **8cd780e9e7cbffde3e75286b19ed554660d53806** delete template docs

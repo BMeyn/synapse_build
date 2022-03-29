@@ -1,7 +1,7 @@
 
 import pytest
 
-from src.demo.main import sample
+from src.synapse_build.main import sample
 
 def test_sample():
   res = sample()

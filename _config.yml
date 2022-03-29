@@ -1,1 +1,2 @@
-remote_theme: just-the-docs/just-the-docs
+title: [Synapse build]
+remote_theme: pages-themes/midnight@v0.2.0

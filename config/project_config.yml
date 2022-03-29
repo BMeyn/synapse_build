@@ -1,0 +1,11 @@
+
+github_owner: "BMeyn"
+github_repo: "temp_python_pkg"
+project_name: "My Project"
+package_name: "BMeyn"
+package_description: "My project description"
+project_banner: "/docs/images/project-banner.png"
+project_feature: 
+    - "Feature 1"
+    - "Feature 2"
+    - "Feature 3"

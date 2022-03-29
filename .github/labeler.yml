@@ -1,0 +1,6 @@
+documentation:
+- any: ['*.md']
+enhancement:
+- any: ['*.py']
+dependencies:
+- requirements.txt

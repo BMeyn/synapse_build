@@ -18,9 +18,9 @@
 
 ## Install:
 
-```
-pip install synapse-build
-```
+
+> pip install synapse-build
+
 
 ## Usage:
 

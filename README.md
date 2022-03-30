@@ -1,4 +1,4 @@
-![banner](https://BMeyn.github.io/synapse_build/docs/images/32779492-1132-4165-8CF8-D4EB45EC26CF.png)
+![banner](https://BMeyn.github.io/synapse_build/docs/images/DF31D973-1D5D-4FFE-BCFB-F354EE3B4538.png)
 
 *****
 

@@ -1,0 +1,153 @@
+{
+	"name": "logs",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "sparkpool",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "0ca87edf-6bbf-431f-a643-3bbc263f38ec"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/f7256e7b-4859-4bf1-af37-6d8bbf16129f/resourceGroups/my-rg-synaps-dev/providers/Microsoft.Synapse/workspaces/my-syn-synaps-dev/bigDataPools/sparkpool",
+				"name": "sparkpool",
+				"type": "Spark",
+				"endpoint": "https://my-syn-synaps-dev.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpool",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					""
+				],
+				"attachments": null,
+				"execution_count": null
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import json\n",
+					"import requests\n",
+					"import datetime\n",
+					"import hashlib\n",
+					"import hmac\n",
+					"import base64\n",
+					"\n",
+					"# Update the customer ID to your Log Analytics workspace ID\n",
+					"customer_id = '249f2bd3-86b3-49c2-a593-6d7658a80c95'\n",
+					"\n",
+					"# For the shared key, use either the primary or the secondary Connected Sources client authentication key   \n",
+					"shared_key = \"74SUwdwZp9GWPVct9i47OO/l4kvJo8z4CAcghetIrXBJRsjXZ0cWqDtefebjWg1hqNeJMsfHoAFI2AC6zJy7Cg==\"\n",
+					"\n",
+					"# The log type is the name of the event that is being submitted\n",
+					"log_type = 'PipelineErrorMessage'\n",
+					"\n",
+					"body = json.dumps(json_data)\n",
+					"\n",
+					"pipeline_id = \"\"\n",
+					"\n",
+					"error_message = \"\"\n",
+					"\n",
+					"# An example JSON web monitor object\n",
+					"json_data = [{\n",
+					"   \"pipeline_run_id\": \"b7253dca-4e06-4ab4-91c6-4aca057e5a2e\",\n",
+					"    \"pipeline_error_message\": \"test-error\",\n",
+					"   \"pipeline_id\": 12345,\n",
+					"    \"error_message\": \"5cdad72f-c848-4df0-8aaa-ffe033e75d57\",\n",
+					"    \"availability_Value\": 100,\n",
+					"    \"performance_Value\": 6.954,\n",
+					"    \"measurement_Name\": \"last_one_hour\",\n",
+					"    \"duration\": 3600,\n",
+					"    \"warning_Threshold\": 0,\n",
+					"    \"critical_Threshold\": 0,\n",
+					"    \"IsActive\": \"true\"\n",
+					"}]\n",
+					"\n",
+					"#####################\n",
+					"######Functions######  \n",
+					"#####################\n",
+					"\n",
+					"# Build the API signature\n",
+					"def build_signature(customer_id, shared_key, date, content_length, method, content_type, resource):\n",
+					"    x_headers = 'x-ms-date:' + date\n",
+					"    string_to_hash = method + \"\\n\" + str(content_length) + \"\\n\" + content_type + \"\\n\" + x_headers + \"\\n\" + resource\n",
+					"    bytes_to_hash = bytes(string_to_hash, encoding=\"utf-8\")  \n",
+					"    decoded_key = base64.b64decode(shared_key)\n",
+					"    encoded_hash = base64.b64encode(hmac.new(decoded_key, bytes_to_hash, digestmod=hashlib.sha256).digest()).decode()\n",
+					"    authorization = \"SharedKey {}:{}\".format(customer_id,encoded_hash)\n",
+					"    return authorization\n",
+					"\n",
+					"# Build and send a request to the POST API\n",
+					"def post_data(customer_id, shared_key, body, log_type):\n",
+					"    method = 'POST'\n",
+					"    content_type = 'application/json'\n",
+					"    resource = '/api/logs'\n",
+					"    rfc1123date = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S GMT')\n",
+					"    content_length = len(body)\n",
+					"    signature = build_signature(customer_id, shared_key, rfc1123date, content_length, method, content_type, resource)\n",
+					"    uri = 'https://' + customer_id + '.ods.opinsights.azure.com' + resource + '?api-version=2016-04-01'\n",
+					"\n",
+					"    headers = {\n",
+					"        'content-type': content_type,\n",
+					"        'Authorization': signature,\n",
+					"        'Log-Type': log_type,\n",
+					"        'x-ms-date': rfc1123date\n",
+					"    }\n",
+					"\n",
+					"    response = requests.post(uri,data=body, headers=headers)\n",
+					"    if (response.status_code >= 200 and response.status_code <= 299):\n",
+					"        print('Accepted')\n",
+					"    else:\n",
+					"        print(\"Response code: {}\".format(response.status_code))\n",
+					"\n",
+					"post_data(customer_id, shared_key, body, log_type)"
+				],
+				"attachments": null,
+				"execution_count": 7
+			}
+		]
+	}
+}

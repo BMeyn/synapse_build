@@ -1,0 +1,260 @@
+{
+	"name": "pipeline-error-message",
+	"properties": {
+		"activities": [
+			{
+				"name": "error_message",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Pipeline Run",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "error_message",
+					"value": {
+						"value": "@activity('Get Pipeline Run').output.message",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get Pipeline Run",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(\n    'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelineruns/',\n    pipeline().parameters.run_id, \n    '?api-version=2020-12-01'\n)",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://dev.azuresynapse.net"
+					}
+				}
+			},
+			{
+				"name": "pipeline_status",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Pipeline Run",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pipeline_status",
+					"value": {
+						"value": "@activity('Get Pipeline Run').output.status",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "pipeline_status",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "pipeline_name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "error_message",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@contains(variables('error_message'), 'Activity failed because an inner activity failed')\n",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Wait2",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Get Activity Runs",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"url": {
+									"value": "@concat(\n    'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelines/',\n    variables('pipeline_name'),\n    '/pipelineruns/',\n    pipeline().parameters.run_id, \n    '/queryActivityruns',\n    '?api-version=2020-12-01'\n)",
+									"type": "Expression"
+								},
+								"connectVia": {
+									"referenceName": "AutoResolveIntegrationRuntime",
+									"type": "IntegrationRuntimeReference"
+								},
+								"method": "POST",
+								"body": {
+									"lastUpdatedAfter": "2021-01-01T00:36:44.3345758Z",
+									"lastUpdatedBefore": "2022-06-16T00:49:48.3686473Z"
+								},
+								"authentication": {
+									"type": "MSI",
+									"resource": "https://dev.azuresynapse.net"
+								}
+							}
+						},
+						{
+							"name": "Activities",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Get Activity Runs",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "pipeline_activities",
+								"value": {
+									"value": "@activity('Get Activity Runs').output.value",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Filter Activities",
+							"type": "Filter",
+							"dependsOn": [
+								{
+									"activity": "Activities",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"items": {
+									"value": "@variables('pipeline_activities')",
+									"type": "Expression"
+								},
+								"condition": {
+									"value": "@and(\n    equals(item().status , 'Failed')\n    ,not(\n        contains(item().error.message, 'Activity failed because an inner activity failed')\n    )\n)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Fail1",
+							"type": "Fail",
+							"dependsOn": [
+								{
+									"activity": "Filter Activities",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"message": {
+									"value": "@variables('error_message')",
+									"type": "Expression"
+								},
+								"errorCode": "500"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "pipeline_name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Pipeline Run",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pipeline_name",
+					"value": {
+						"value": "@activity('Get Pipeline Run').output.PipelineName",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"run_id": {
+				"type": "string",
+				"defaultValue": "46776480-e8c4-4098-9d9b-5b1b9a78abe2"
+			}
+		},
+		"variables": {
+			"error_message": {
+				"type": "String"
+			},
+			"pipeline_status": {
+				"type": "String"
+			},
+			"pipeline_name": {
+				"type": "String"
+			},
+			"pipeline_activities": {
+				"type": "Array"
+			},
+			"is_debug": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-04-07T06:54:58Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

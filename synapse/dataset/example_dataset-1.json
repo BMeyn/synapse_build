@@ -1,0 +1,27 @@
+{
+	"name": "example_dataset-1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "my-syn-synaps-dev-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "config.json",
+				"fileSystem": "synapse"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

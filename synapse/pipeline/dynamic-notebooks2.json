@@ -1,0 +1,83 @@
+{
+	"name": "dynamic-notebooks2",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach in config",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "load_config",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@json(activity('load_config').output.status.Output.result.exitValue)",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Main",
+							"type": "SynapseNotebook",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"notebook": {
+									"referenceName": {
+										"value": "@json(item()).name",
+										"type": "Expression"
+									},
+									"type": "NotebookReference"
+								},
+								"snapshot": true
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "load_config",
+				"type": "SynapseNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebook": {
+						"referenceName": "load_config",
+						"type": "NotebookReference"
+					},
+					"snapshot": true,
+					"sparkPool": {
+						"referenceName": "sparkpool",
+						"type": "BigDataPoolReference"
+					}
+				}
+			}
+		],
+		"variables": {
+			"test": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2022-01-28T23:17:04Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

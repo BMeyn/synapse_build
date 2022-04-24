@@ -2420,7 +2420,12 @@
 						"name": "Wait1",
 						"type": "Wait",
 						"dependsOn": [],
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "test",
+								"value": "test"
+							}
+						],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
 						}

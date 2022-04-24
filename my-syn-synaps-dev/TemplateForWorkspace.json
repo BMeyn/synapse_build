@@ -390,31 +390,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/NewPipeline1')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2022-01-28T23:11:42Z"
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/NewPipeline45')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -2388,12 +2363,40 @@
 					}
 				},
 				"annotations": [],
+				"output": {
+					"test": "new"
+				},
 				"lastPublishTime": "2022-01-28T16:59:50Z"
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/pipelines/NewPipeline1')]",
 				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/NewPipeline1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2022-01-28T23:11:42Z"
+			},
+			"dependsOn": []
 		}
 	]
 }

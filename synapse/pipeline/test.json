@@ -54,7 +54,7 @@
 							"operand": "ActivityName",
 							"operator": "Equals",
 							"values": [
-								"PipelineOutput"
+								"PipelineOutputs"
 							]
 						}
 					},

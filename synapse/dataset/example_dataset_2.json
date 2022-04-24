@@ -1,5 +1,5 @@
 {
-	"name": "example_dataset-2",
+	"name": "example_dataset_2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "example-linked-service-1",

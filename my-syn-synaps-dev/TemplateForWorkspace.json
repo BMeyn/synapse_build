@@ -2445,6 +2445,9 @@
 						],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
+						},
+						"output": {
+							"test": "test"
 						}
 					}
 				],
@@ -2453,9 +2456,6 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
-				"output": {
-					"test": "test"
-				},
 				"lastPublishTime": "2022-01-28T23:11:42Z"
 			},
 			"dependsOn": []

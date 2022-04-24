@@ -65,7 +65,9 @@
 				"defaultValue": "test"
 			}
 		},
-		"annotations": [],
+		"annotations": [
+			"test"
+		],
 		"lastPublishTime": "2022-01-28T16:59:50Z"
 	},
 	"type": "Microsoft.Synapse/workspaces/pipelines"

@@ -2431,6 +2431,9 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
+				"output": {
+					"test": "new"
+				},
 				"lastPublishTime": "2022-01-28T23:11:42Z"
 			},
 			"dependsOn": []

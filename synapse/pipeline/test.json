@@ -41,14 +41,18 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@concat(\n'https://',pipeline().DataFactory, 'dev.azuresynapse.net',\n'/pipelineruns/', activity('Execute Pipeline1').output.pipelineID, '?api-version=2020-12-01'\n)",
+						"value": "@concat(\n'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelineruns/',\nactivity('Execute Pipeline1').output.pipelineRunId , '?api-version=2020-12-01'\n)",
 						"type": "Expression"
 					},
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
 					},
-					"method": "GET"
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://dev.azuresynapse.net"
+					}
 				}
 			}
 		],

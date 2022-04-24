@@ -5,7 +5,14 @@
 			{
 				"name": "Wait1",
 				"type": "Wait",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [
 					{
 						"name": "test",
@@ -31,6 +38,24 @@
 				"typeProperties": {
 					"variableName": "output",
 					"value": "test"
+				}
+			},
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [
+					{
+						"name": "test",
+						"value": "pipeline"
+					}
+				],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "NewPipeline1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
 				}
 			}
 		],

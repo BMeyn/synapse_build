@@ -2316,44 +2316,6 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [
-							{
-								"activity": "Execute Pipeline1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [
-							{
-								"name": "test",
-								"value": "new"
-							}
-						],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					},
-					{
-						"name": "Set variable1",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Wait1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "output",
-							"value": "test"
-						}
-					},
-					{
 						"name": "Execute Pipeline1",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
@@ -2370,6 +2332,42 @@
 							},
 							"waitOnCompletion": true,
 							"parameters": {}
+						}
+					},
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Execute Pipeline1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@concat(\n'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelineruns/',\nactivity('Execute Pipeline1').output.pipelineRunId , '?api-version=2020-12-01'\n)",
+								"type": "Expression"
+							},
+							"connectVia": {
+								"referenceName": "AutoResolveIntegrationRuntime",
+								"type": "IntegrationRuntimeReference"
+							},
+							"method": "GET",
+							"headers": {},
+							"authentication": {
+								"type": "MSI",
+								"resource": "https://dev.azuresynapse.net"
+							}
 						}
 					}
 				],
@@ -2389,13 +2387,12 @@
 						"defaultValue": "test"
 					}
 				},
-				"annotations": [
-					"@pipeline().parameters.test"
-				],
+				"annotations": [],
 				"lastPublishTime": "2022-01-28T16:59:50Z"
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/pipelines/NewPipeline1')]"
+				"[concat(variables('workspaceId'), '/pipelines/NewPipeline1')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		}
 	]

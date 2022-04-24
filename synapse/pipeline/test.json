@@ -83,6 +83,41 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Get Pipeline activities",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Execute Pipeline1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat(\n'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelines/',activity('Execute Pipeline1').output.pipelineName ,'/pipelineruns/',\nactivity('Execute Pipeline1').output.pipelineRunId , '/queryActivityruns?api-version=2020-12-01'\n)",
+						"type": "Expression"
+					},
+					"connectVia": {
+						"referenceName": "AutoResolveIntegrationRuntime",
+						"type": "IntegrationRuntimeReference"
+					},
+					"method": "POST",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://dev.azuresynapse.net"
+					}
+				}
 			}
 		],
 		"parameters": {

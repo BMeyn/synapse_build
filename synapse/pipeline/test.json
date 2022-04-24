@@ -53,7 +53,9 @@
 						"filters": {
 							"operand": "ActivityName",
 							"operator": "Equals",
-							"value": "PipelineOutput"
+							"values": [
+								"PipelineOutput"
+							]
 						}
 					},
 					"authentication": {

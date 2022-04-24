@@ -21,7 +21,7 @@
 				}
 			},
 			{
-				"name": "Query activities",
+				"name": "Get Pipeline Outputs",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -49,6 +49,13 @@
 						"type": "IntegrationRuntimeReference"
 					},
 					"method": "POST",
+					"body": {
+						"filters": {
+							"operand": "ActivityName",
+							"operator": "Equals",
+							"value": "PipelineOutput"
+						}
+					},
 					"authentication": {
 						"type": "MSI",
 						"resource": "https://dev.azuresynapse.net"

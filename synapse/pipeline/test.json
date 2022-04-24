@@ -6,7 +6,12 @@
 				"name": "Wait1",
 				"type": "Wait",
 				"dependsOn": [],
-				"userProperties": [],
+				"userProperties": [
+					{
+						"name": "test",
+						"value": "new"
+					}
+				],
 				"typeProperties": {
 					"waitTimeInSeconds": 1
 				}

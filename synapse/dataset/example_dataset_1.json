@@ -1,5 +1,5 @@
 {
-	"name": "example_dataset-1",
+	"name": "example_dataset_1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "my-syn-synaps-dev-WorkspaceDefaultStorage",

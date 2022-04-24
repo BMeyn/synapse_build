@@ -18,8 +18,33 @@
 				"output": {
 					"test": "test"
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "test",
+					"value": {
+						"value": "@pipeline().Pipeline",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"test": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"output": {
 			"test": 2

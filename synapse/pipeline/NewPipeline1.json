@@ -27,7 +27,9 @@
 		"lastPublishTime": "2022-01-28T23:11:42Z"
 	},
 	"output": {
-		"test": 1
+		"value": {
+			"TEST": 1
+		}
 	},
 	"type": "Microsoft.Synapse/workspaces/pipelines"
 }

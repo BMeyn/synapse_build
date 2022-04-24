@@ -72,7 +72,7 @@
 			}
 		},
 		"annotations": [
-			"@variables('output')"
+			"@activity('Execute Pipeline1').output"
 		],
 		"lastPublishTime": "2022-01-28T16:59:50Z"
 	},

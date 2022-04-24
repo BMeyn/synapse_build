@@ -2381,6 +2381,26 @@
 								"resource": "https://dev.azuresynapse.net"
 							}
 						}
+					},
+					{
+						"name": "Set variable1",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Execute Pipeline1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "output",
+							"value": {
+								"value": "@concat(activity('Execute Pipeline1').output)",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -2428,9 +2448,6 @@
 						],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
-						},
-						"output": {
-							"test": "new"
 						}
 					}
 				],
@@ -2439,6 +2456,9 @@
 					"cancelAfter": {}
 				},
 				"annotations": [],
+				"pipelineRunOutput": {
+					"test": "test"
+				},
 				"lastPublishTime": "2022-01-28T23:11:42Z"
 			},
 			"dependsOn": []

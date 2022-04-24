@@ -27,7 +27,7 @@
 		"lastPublishTime": "2022-01-28T23:11:42Z"
 	},
 	"output": {
-		"pipelineName": "TEST"
+		"pipelineRunOutput": "TEST"
 	},
 	"type": "Microsoft.Synapse/workspaces/pipelines"
 }

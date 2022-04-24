@@ -64,9 +64,7 @@
 				"defaultValue": "test"
 			}
 		},
-		"annotations": [
-			"@activity('Execute Pipeline1').output"
-		],
+		"annotations": [],
 		"lastPublishTime": "2022-01-28T16:59:50Z"
 	},
 	"type": "Microsoft.Synapse/workspaces/pipelines"

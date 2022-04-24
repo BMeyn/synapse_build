@@ -20,7 +20,7 @@
 				}
 			},
 			{
-				"name": "Set variable1",
+				"name": "PipelineOutputs",
 				"type": "SetVariable",
 				"dependsOn": [
 					{

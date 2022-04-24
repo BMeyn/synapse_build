@@ -16,14 +16,14 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@concat(\n'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelineruns/',\npipeline().parameters.RunID,'?api-version=2020-12-01'\n)",
+						"value": "@concat(\n'https://my-syn-synaps-dev.dev.azuresynapse.net/debugruns/',\npipeline().parameters.RunID,'?api-version=2020-12-01'\n)",
 						"type": "Expression"
 					},
 					"connectVia": {
 						"referenceName": "AutoResolveIntegrationRuntime",
 						"type": "IntegrationRuntimeReference"
 					},
-					"method": "POST",
+					"method": "GET",
 					"authentication": {
 						"type": "MSI",
 						"resource": "https://dev.azuresynapse.net"

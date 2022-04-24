@@ -76,7 +76,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": {
-						"value": "@concat(\n'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelines/',activity('Execute Pipeline1').output.queryActivityruns,'/pipelineruns/',\nactivity('Execute Pipeline1').output.pipelineRunId , 'queryActivityruns?api-version=2020-12-01'\n)",
+						"value": "@concat(\n'https://my-syn-synaps-dev.dev.azuresynapse.net/pipelines/',activity('Execute Pipeline1').output.pipelineName ,'/pipelineruns/',\nactivity('Execute Pipeline1').output.pipelineRunId , 'queryActivityruns?api-version=2020-12-01'\n)",
 						"type": "Expression"
 					},
 					"connectVia": {

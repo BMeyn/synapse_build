@@ -1241,7 +1241,12 @@
 						"name": "Wait1",
 						"type": "Wait",
 						"dependsOn": [],
-						"userProperties": [],
+						"userProperties": [
+							{
+								"name": "test",
+								"value": "new"
+							}
+						],
 						"typeProperties": {
 							"waitTimeInSeconds": 1
 						}
@@ -2342,6 +2347,20 @@
 			},
 			"dependsOn": [],
 			"location": "westeurope"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/synapsePowerBI')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "PowerBIWorkspace",
+				"typeProperties": {
+					"workspaceID": "62240098-6f97-4fdb-94b7-d5641af36439",
+					"tenantID": "3d355765-67d9-47cd-9c7a-bf31179f56eb"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }

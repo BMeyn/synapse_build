@@ -14,13 +14,13 @@
 				],
 				"typeProperties": {
 					"waitTimeInSeconds": 1
+				},
+				"output": {
+					"test": "new"
 				}
 			}
 		],
 		"annotations": [],
-		"output": {
-			"test": "new"
-		},
 		"lastPublishTime": "2022-01-28T23:11:42Z"
 	},
 	"type": "Microsoft.Synapse/workspaces/pipelines"

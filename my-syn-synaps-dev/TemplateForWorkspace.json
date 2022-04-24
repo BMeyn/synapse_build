@@ -1232,89 +1232,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/test')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [
-							{
-								"activity": "Execute Pipeline1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [
-							{
-								"name": "test",
-								"value": "new"
-							}
-						],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					},
-					{
-						"name": "Set variable1",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Wait1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "output",
-							"value": "test"
-						}
-					},
-					{
-						"name": "Execute Pipeline1",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"userProperties": [
-							{
-								"name": "test",
-								"value": "pipeline"
-							}
-						],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "NewPipeline1",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"variables": {
-					"output": {
-						"type": "String",
-						"defaultValue": "test"
-					}
-				},
-				"annotations": [
-					"test"
-				],
-				"lastPublishTime": "2022-01-28T16:59:50Z"
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/pipelines/NewPipeline1')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/config')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -2391,6 +2308,95 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/test')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [
+							{
+								"activity": "Execute Pipeline1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [
+							{
+								"name": "test",
+								"value": "new"
+							}
+						],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
+					},
+					{
+						"name": "Set variable1",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "output",
+							"value": "test"
+						}
+					},
+					{
+						"name": "Execute Pipeline1",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [
+							{
+								"name": "test",
+								"value": "pipeline"
+							}
+						],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "NewPipeline1",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"test": {
+						"type": "string",
+						"defaultValue": "annotation"
+					}
+				},
+				"variables": {
+					"output": {
+						"type": "String",
+						"defaultValue": "test"
+					}
+				},
+				"annotations": [
+					"@pipeline().parameters.test"
+				],
+				"lastPublishTime": "2022-01-28T16:59:50Z"
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/NewPipeline1')]"
+			]
 		}
 	]
 }

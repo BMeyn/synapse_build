@@ -59,6 +59,12 @@
 				}
 			}
 		],
+		"parameters": {
+			"test": {
+				"type": "string",
+				"defaultValue": "annotation"
+			}
+		},
 		"variables": {
 			"output": {
 				"type": "String",
@@ -66,7 +72,7 @@
 			}
 		},
 		"annotations": [
-			"test"
+			"@pipeline().parameters.test"
 		],
 		"lastPublishTime": "2022-01-28T16:59:50Z"
 	},

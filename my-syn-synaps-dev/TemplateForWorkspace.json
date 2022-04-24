@@ -1240,7 +1240,14 @@
 					{
 						"name": "Wait1",
 						"type": "Wait",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Execute Pipeline1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"userProperties": [
 							{
 								"name": "test",
@@ -1267,6 +1274,25 @@
 							"variableName": "output",
 							"value": "test"
 						}
+					},
+					{
+						"name": "Execute Pipeline1",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [
+							{
+								"name": "test",
+								"value": "pipeline"
+							}
+						],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "NewPipeline1",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
 					}
 				],
 				"policy": {
@@ -1282,7 +1308,9 @@
 				"annotations": [],
 				"lastPublishTime": "2022-01-28T16:59:50Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/NewPipeline1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/config')]",

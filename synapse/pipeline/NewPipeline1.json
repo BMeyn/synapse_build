@@ -13,7 +13,10 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2022-01-28T23:11:42Z"
+		"lastPublishTime": "2022-01-28T23:11:42Z",
+		"output": {
+			"test": "new"
+		}
 	},
 	"type": "Microsoft.Synapse/workspaces/pipelines"
 }

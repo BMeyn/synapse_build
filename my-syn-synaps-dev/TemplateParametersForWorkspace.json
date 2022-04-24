@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "my-syn-synaps-dev"
+		},
+		"example_liked_service-1_connectionString": {
+			"value": ""
+		},
+		"my-syn-synaps-dev-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"example-linked-service-1_properties_typeProperties_url": {
+			"value": "https://mystsynapsdev.dfs.core.windows.net"
+		},
+		"example_linked_service-1_properties_typeProperties_url": {
+			"value": "https://mystsynapsdev.dfs.core.windows.net"
+		},
+		"my-syn-synaps-dev-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://mystsynapsdev.dfs.core.windows.net"
+		}
+	}
+}

@@ -40,7 +40,7 @@ jobs:
  
     - name: Test with pytest
       run: |
-        pytest --cov=src test/ --junitxml=out_report.xml --cov-report xml
+        pytest --cov=src test/ --junitxml=out_report.xml --cov-report xml --verbose
     
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1

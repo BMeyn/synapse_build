@@ -8,6 +8,8 @@ __pycache__/
 # C extensions
 *.so
 
+tmp/*
+
 # Distribution / packaging
 .Python
 build/
@@ -130,3 +132,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+src/synapse_build/schemas/linkedservices
+src/synapse_build/schemas/notebooks

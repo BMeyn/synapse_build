@@ -36,7 +36,8 @@
 		"njpwerner.autodocstring",
 		"wayou.vscode-todo-highlight",
 		"Gruntfuggly.todo-tree",
-		"GitHub.vscode-pull-request-github"
+		"GitHub.vscode-pull-request-github",
+		"GitHub.copilot"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

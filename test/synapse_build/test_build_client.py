@@ -5,6 +5,7 @@ import os
 from pytest_cases import parametrize_with_cases
 from .test_build_client_cases import TestCases_BuildClient
 from src.synapse_build.build_client import BuildClient
+from operator import itemgetter
 
 def load_test_results(output_dir):
     """
@@ -33,6 +34,8 @@ def test_BuildClient(success,inputs,expected):
     client.build()
     artifacts_json, parameters_json = load_test_results(inputs["output_dir"])
 
+    expected["artifacts"]["resources"] = sorted(expected["artifacts"]["resources"], key=itemgetter('name')) 
+    artifacts_json["resources"] = sorted(artifacts_json["resources"], key=itemgetter('name'))
   
     assert json.dumps(artifacts_json, sort_keys=True) == json.dumps(expected["artifacts"], sort_keys=True)
     assert json.dumps(parameters_json, sort_keys=True) == json.dumps(expected["parameters"], sort_keys=True)

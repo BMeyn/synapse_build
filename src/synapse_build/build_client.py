@@ -433,11 +433,11 @@ class BuildClient(object):
         
         # save artifact_json_objects_dict to json file
         with open(os.path.join(self.output_dir, "test_artifacts.json"), "w",encoding="utf-8") as f:
-            json.dump(self.DeploymentArtifacts.to_json(), f, indent=4)
+            json.dump(self.DeploymentArtifacts.to_json(), f, indent=4, sort_keys=True)
         
         # save artifact_json_objects_dict to json file
         with open(os.path.join(self.output_dir,"test_parameters.json"), "w", encoding="utf-8") as f:
-            json.dump(self.DeploymentParameters.to_json(), f, indent=4)
+            json.dump(self.DeploymentParameters.to_json(), f, indent=4, sort_keys=True)
 
         # TODO: refactoring
         # TODO: add logging

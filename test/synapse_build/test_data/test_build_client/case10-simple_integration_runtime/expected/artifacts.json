@@ -1,0 +1,40 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "name": "[concat(parameters('workspaceName'), '/AutoResolveIntegrationRuntime')]",
+            "properties": {
+                "type": "Managed",
+                "typeProperties": {
+                    "computeProperties": "[parameters('AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties')]"
+                }
+            },
+            "type": "Microsoft.Synapse/workspaces/integrationruntimes",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        }
+    ],
+    "parameters": {
+        "workspaceName": {
+            "type": "string",
+            "metadata": "Workspace name",
+            "defaultValue": "my-syn-synaps-dev"
+        },
+        "AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties":{
+            "defaultValue": {
+                "location": "AutoResolve",
+                "dataFlowProperties": {
+                    "computeType": "General",
+                    "coreCount": 8,
+                    "timeToLive": 0
+                }
+            },
+            "type": "object"
+
+        }
+    },
+    "variables": {
+        "workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+    }
+}

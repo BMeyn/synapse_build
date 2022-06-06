@@ -1,0 +1,109 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+
+        {
+            "name": "[concat(parameters('workspaceName'), '/1_pipeline_simple')]",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Wait1",
+                        "type": "Wait",
+                        "dependsOn": [],
+                        "userProperties": [],
+                        "typeProperties": {
+                            "waitTimeInSeconds": "[parameters('1_pipeline_simple_properties_activities_0_typeProperties_waitTimeInSeconds')]"
+                        }
+                    }
+                ],
+                "annotations": [],
+                "lastPublishTime": "2022-03-02T12:48:59Z"
+            },
+            "type": "Microsoft.Synapse/workspaces/pipelines",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('workspaceName'), '/2_pipeline_simple')]",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Wait1",
+                        "type": "Wait",
+                        "dependsOn": [],
+                        "userProperties": [],
+                        "typeProperties": {
+                            "waitTimeInSeconds": "[parameters('2_pipeline_simple_properties_activities_0_typeProperties_waitTimeInSeconds')]"
+                        }
+                    }
+                ],
+                "annotations": [],
+                "lastPublishTime": "2022-03-02T12:48:59Z"
+            },
+            "type": "Microsoft.Synapse/workspaces/pipelines",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('workspaceName'), '/3_pipeline_simple')]",
+            "properties": {
+                "activities": [
+                    {
+                        "name": "Wait1",
+                        "type": "Wait",
+                        "dependsOn": [],
+                        "userProperties": [],
+                        "typeProperties": {
+                            "waitTimeInSeconds": "[parameters('3_pipeline_simple_properties_activities_0_typeProperties_waitTimeInSeconds')]"
+                        }
+                    },
+                    {
+                        "name": "Wait2",
+                        "type": "Wait",
+                        "dependsOn": [],
+                        "userProperties": [],
+                        "typeProperties": {
+                            "waitTimeInSeconds": "[parameters('3_pipeline_simple_properties_activities_1_typeProperties_waitTimeInSeconds')]",
+                            "headers": "[parameters('3_pipeline_simple_properties_activities_1_typeProperties_headers')]"
+                        }
+                    }
+                ],
+                "annotations": [],
+                "lastPublishTime": "2022-03-02T12:48:59Z"
+            },
+            "type": "Microsoft.Synapse/workspaces/pipelines",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        }
+    ],
+    "parameters": {
+        "workspaceName": {
+            "type": "string",
+            "metadata": "Workspace name",
+            "defaultValue": "my-syn-synaps-dev"
+        },
+        "1_pipeline_simple_properties_activities_0_typeProperties_waitTimeInSeconds": {
+            "type": "int"
+        },
+        "2_pipeline_simple_properties_activities_0_typeProperties_waitTimeInSeconds": {
+            "type": "int"
+        },
+        "3_pipeline_simple_properties_activities_0_typeProperties_waitTimeInSeconds": {
+            "type": "int"
+        },
+        "3_pipeline_simple_properties_activities_1_typeProperties_waitTimeInSeconds": {
+            "type": "int"
+        },
+        "3_pipeline_simple_properties_activities_1_typeProperties_headers": {
+            "defaultValue": {
+                "key": "key1",
+                "value": "value1"
+            },
+            "type": "object"
+        }
+    },
+    "variables": {
+        "workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+    }
+}

@@ -32,15 +32,15 @@ jobs:
         python3 -m pip install --upgrade pip
         python3 -m pip install --upgrade setuptools
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: flake8 Lint
-      uses: reviewdog/action-flake8@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        reporter: github-pr-review
+    # - name: flake8 Lint
+    #   uses: reviewdog/action-flake8@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     reporter: github-pr-review
  
     - name: Test with pytest
       run: |
-        pytest --cov=src test/ --junitxml=out_report.xml --cov-report xml
+        pytest --cov=src test/ --junitxml=out_report.xml --cov-report xml --verbose
     
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1

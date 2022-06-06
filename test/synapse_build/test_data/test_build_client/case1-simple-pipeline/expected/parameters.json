@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspaceName": {
+            "value": "my-syn-synaps-dev"
+        },
+        "1_pipeline_simple_properties_activities_0_typeProperties_waitTimeInSeconds": {
+            "value": ""
+        }
+    }
+}

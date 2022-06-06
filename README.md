@@ -1,4 +1,6 @@
-![banner](https://BMeyn.github.io/synapse_build/docs/images/DF31D973-1D5D-4FFE-BCFB-F354EE3B4538.png)
+# Synapse Build
+
+![banner](https://BMeyn.github.io/synapse_build//docs/images/project-banner.png)
 
 *****
 
@@ -18,9 +20,9 @@
 
 ## Install:
 
-
-> pip install synapse-build
-
+```
+pip install synapse-build
+```
 
 ## Usage:
 

@@ -2,8 +2,10 @@ handsdown
 wheel
 pytest
 pytest-cov
+pytest-cases
 setuptools_scm
 genbadge[all]
 jinja2==3.0
 flake8
+jsonschema
 PyYAML

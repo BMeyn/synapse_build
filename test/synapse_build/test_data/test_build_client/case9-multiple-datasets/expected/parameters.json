@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspaceName": {
+            "value": "my-syn-synaps-dev"
+        },
+        "1-simple-dataset_properties_typeProperties_location":{
+            "value": {
+                "type": "AzureBlobFSLocation",
+                "fileName": "config.json",
+                "fileSystem": "synapse"
+            }
+        },
+        "2-simple-dataset_properties_typeProperties_location":{
+            "value": {
+                "type": "AzureBlobFSLocation",
+                "fileName": "config.json",
+                "fileSystem": "synapse"
+            }
+        }
+    }
+}

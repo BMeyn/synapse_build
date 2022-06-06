@@ -1,0 +1,51 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "name": "[concat(parameters('workspaceName'), '/1-simple-dataset')]",
+            "properties": {
+                "linkedServiceName": {
+                    "referenceName": "my-syn-synaps-dev-WorkspaceDefaultStorage",
+                    "type": "LinkedServiceReference"
+                },
+                "annotations": [],
+                "type": "Json",
+                "typeProperties": {
+                    "location": "[parameters('1-simple-dataset_properties_typeProperties_location')]"
+                },
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "type": "Microsoft.Synapse/workspaces/datasets",
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+                "[concat(variables('workspaceId'), '/linkedServices/my-syn-synaps-dev-WorkspaceDefaultStorage')]"
+            ]
+        }
+    ],
+    "parameters": {
+        "workspaceName": {
+            "type": "string",
+            "metadata": "Workspace name",
+            "defaultValue": "my-syn-synaps-dev"
+        },
+        "1-simple-dataset_properties_typeProperties_location":{
+            "defaultValue": {
+                "type": "AzureBlobFSLocation",
+                "fileName": "config.json",
+                "fileSystem": "synapse"
+            },
+            "type": "object"
+        }
+    },
+    "variables": {
+        "workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "name": "[concat(parameters('workspaceName'), '/1-simple-linked-service')]",
+            "type": "Microsoft.Synapse/workspaces/linkedservices",
+            "properties": {
+                "typeProperties": {
+                    "url": "[parameters('1-simple-linked-service_properties_typeProperties_url')]"
+                },
+                "type": "AzureBlobFS",
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                },
+                "annotations": []
+            },
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+                "[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+            ]
+        },
+        {
+            "name": "[concat(parameters('workspaceName'), '/2-special-type-linked-service')]",
+            "type": "Microsoft.Synapse/workspaces/linkedservices",
+            "properties": {
+                "typeProperties": {
+                    "dataLakeStoreUri": "[parameters('2-special-type-linked-service_properties_typeProperties_dataLakeStoreUri')]"
+                },
+                "type": "AzureDataLakeStore",
+                "connectVia": {
+                    "referenceName": "AutoResolveIntegrationRuntime",
+                    "type": "IntegrationRuntimeReference"
+                },
+                "annotations": []
+            },
+            "apiVersion": "2015-01-01",
+            "dependsOn": [
+                "[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+            ]
+        }
+    ],
+    "parameters": {
+        "workspaceName": {
+            "type": "string",
+            "metadata": "Workspace name",
+            "defaultValue": "my-syn-synaps-dev"
+        },
+        "1-simple-linked-service_properties_typeProperties_url":{
+            "defaultValue": "https://mystsynapsdev.dfs.core.windows.net",
+            "type": "string"
+        },
+        "2-special-type-linked-service_properties_typeProperties_dataLakeStoreUri":{
+            "defaultValue": "DefaultEndpointsProtocol=https;AccountName=<accountname>;AccountKey=<accountkey>",
+            "type": "string"
+        }
+    },
+    "variables": {
+        "workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+    }
+}

@@ -1,0 +1,124 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "name": "[concat(parameters('workspaceName'), '/1-simple-trigger')]",
+            "properties": {
+                "annotations": [],
+                "runtimeState": "Stopped",
+                "pipelines": [],
+                "type": "ScheduleTrigger",
+                "typeProperties": {
+                    "recurrence": {
+                        "frequency": "[parameters('1-simple-trigger_freq')]",
+                        "interval": "[parameters('1-simple-trigger_properties_typeProperties_recurrence_triggerSuffix')]",
+                        "startTime": "[parameters('1-simple-trigger_properties_typeProperties_recurrence_startTime')]",
+                        "timeZone": "[parameters('1-simple-trigger_properties_typeProperties_recurrence_timeZone')]"
+                    }
+                }
+            },
+            "type": "Microsoft.Synapse/workspaces/triggers",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('workspaceName'), '/2-simple-trigger')]",
+            "properties": {
+                "annotations": [],
+                "runtimeState": "Stopped",
+                "pipelines": [],
+                "type": "ScheduleTrigger",
+                "typeProperties": {
+                    "recurrence": {
+                        "frequency": "[parameters('2-simple-trigger_freq')]",
+                        "interval": "[parameters('2-simple-trigger_properties_typeProperties_recurrence_triggerSuffix')]",
+                        "startTime": "[parameters('2-simple-trigger_properties_typeProperties_recurrence_startTime')]",
+                        "timeZone": "[parameters('2-simple-trigger_properties_typeProperties_recurrence_timeZone')]"
+                    }
+                }
+            },
+            "type": "Microsoft.Synapse/workspaces/triggers",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        },
+        {
+            "name": "[concat(parameters('workspaceName'), '/3-simple-trigger')]",
+            "properties": {
+                "annotations": [],
+                "runtimeState": "Stopped",
+                "pipelines": [],
+                "type": "ScheduleTrigger",
+                "typeProperties": {
+                    "recurrence": {
+                        "frequency": "[parameters('3-simple-trigger_freq')]",
+                        "interval": "[parameters('3-simple-trigger_properties_typeProperties_recurrence_triggerSuffix')]",
+                        "startTime": "[parameters('3-simple-trigger_properties_typeProperties_recurrence_startTime')]",
+                        "timeZone": "[parameters('3-simple-trigger_properties_typeProperties_recurrence_timeZone')]"
+                    }
+                }
+            },
+            "type": "Microsoft.Synapse/workspaces/triggers",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        }
+    ],
+    "parameters": {
+        "workspaceName": {
+            "type": "string",
+            "metadata": "Workspace name",
+            "defaultValue": "my-syn-synaps-dev"
+        },
+        "1-simple-trigger_properties_typeProperties_recurrence_startTime": {
+            "defaultValue": "2022-05-05T05:00:00Z",
+            "type": "string"
+        },
+        "1-simple-trigger_properties_typeProperties_recurrence_timeZone": {
+            "defaultValue": "UTC",
+            "type": "string"
+        },
+        "1-simple-trigger_properties_typeProperties_recurrence_triggerSuffix": {
+            "defaultValue": 30,
+            "type": "int"
+        },
+        "1-simple-trigger_freq": {
+            "defaultValue": "Minute",
+            "type": "string"
+        },
+        "2-simple-trigger_properties_typeProperties_recurrence_startTime": {
+            "defaultValue": "2022-05-05T05:00:00Z",
+            "type": "string"
+        },
+        "2-simple-trigger_properties_typeProperties_recurrence_timeZone": {
+            "defaultValue": "UTC",
+            "type": "string"
+        },
+        "2-simple-trigger_properties_typeProperties_recurrence_triggerSuffix": {
+            "defaultValue": 30,
+            "type": "int"
+        },
+        "2-simple-trigger_freq": {
+            "defaultValue": "Minute",
+            "type": "string"
+        },
+        "3-simple-trigger_properties_typeProperties_recurrence_startTime": {
+            "defaultValue": "2022-05-05T05:00:00Z",
+            "type": "string"
+        },
+        "3-simple-trigger_properties_typeProperties_recurrence_timeZone": {
+            "defaultValue": "UTC",
+            "type": "string"
+        },
+        "3-simple-trigger_properties_typeProperties_recurrence_triggerSuffix": {
+            "defaultValue": 30,
+            "type": "int"
+        },
+        "3-simple-trigger_freq": {
+            "defaultValue": "Minute",
+            "type": "string"
+        }
+    },
+    "variables": {
+        "workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+    }
+}

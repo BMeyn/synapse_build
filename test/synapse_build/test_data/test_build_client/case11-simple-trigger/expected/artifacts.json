@@ -1,0 +1,52 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "name": "[concat(parameters('workspaceName'), '/simple-trigger')]",
+            "properties": {
+                "annotations": [],
+                "runtimeState": "Stopped",
+                "pipelines": [],
+                "type": "ScheduleTrigger",
+                "typeProperties": {
+                    "recurrence": {
+                        "frequency": "[parameters('simple-trigger_freq')]",
+                        "interval": "[parameters('simple-trigger_properties_typeProperties_recurrence_triggerSuffix')]",
+                        "startTime": "[parameters('simple-trigger_properties_typeProperties_recurrence_startTime')]",
+                        "timeZone": "[parameters('simple-trigger_properties_typeProperties_recurrence_timeZone')]"
+                    }
+                }
+            },
+            "type": "Microsoft.Synapse/workspaces/triggers",
+            "apiVersion": "2015-01-01",
+            "dependsOn": []
+        }
+    ],
+    "parameters": {
+        "workspaceName": {
+            "type": "string",
+            "metadata": "Workspace name",
+            "defaultValue": "my-syn-synaps-dev"
+        },
+        "simple-trigger_properties_typeProperties_recurrence_startTime": {
+            "defaultValue": "2022-05-05T05:00:00Z",
+            "type": "string"
+        },
+        "simple-trigger_properties_typeProperties_recurrence_timeZone": {
+            "defaultValue": "UTC",
+            "type": "string"
+        },
+        "simple-trigger_properties_typeProperties_recurrence_triggerSuffix": {
+            "defaultValue": 30,
+            "type": "int"
+        },
+        "simple-trigger_freq": {
+            "defaultValue": "Minute",
+            "type": "string"
+        }
+    },
+    "variables": {
+        "workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
+    }
+}

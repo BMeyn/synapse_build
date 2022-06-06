@@ -1,0 +1,21 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workspaceName": {
+            "value": "my-syn-synaps-dev"
+        },
+        "simple-trigger_properties_typeProperties_recurrence_startTime":{
+            "value": "2022-05-05T05:00:00Z"
+        },
+        "simple-trigger_properties_typeProperties_recurrence_timeZone":{
+            "value": "UTC"
+        },
+        "simple-trigger_properties_typeProperties_recurrence_triggerSuffix":{
+            "value": 30
+        },
+        "simple-trigger_freq":{
+            "value": "Minute"
+        }
+    }
+}

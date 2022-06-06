@@ -40,9 +40,7 @@ def test_ParameterConfig(inputs, expected):
 
     # initialize ParameterConfig
     config = ParameterConfig(config_path=inputs)
-    
-    # load expected config file from fixtures
-    # with open(os.path.join("test/synapse_build/fixtures/", exp_config_path), 'r', encoding="utf-8") as f:
-    #     expected_config_file = json.load(f)
+
+    print(config.to_json())
 
     assert config.to_json() == expected

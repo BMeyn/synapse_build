@@ -109,49 +109,14 @@ class TestCases_ParameterConfig():
         input_config_path = ""
         # define expected config
         expected = {
-            "Microsoft.Synapse/workspaces/notebooks": {
-                "properties": {
-                    "bigDataPool": {
-                        "referenceName": "="}}},
-            "Microsoft.Synapse/workspaces/sqlscripts": {
-                "properties": {
-                    "content": {
-                        "currentConnection": {
-                            "*": "-"}}}},
-            "Microsoft.Synapse/workspaces/pipelines": {
-                "properties": {
-                    "activities": [
-                        {
-                            "typeProperties": {
-                                "waitTimeInSeconds": "-::int",
-                                "headers": "=::object"}}]}},
-            "Microsoft.Synapse/workspaces/integrationRuntimes": {
-                "properties": {
-                    "typeProperties": {
-                        "*": "="}}},
-            "Microsoft.Synapse/workspaces/triggers": {
-                "properties": {
-                    "typeProperties": {
-                        "recurrence": {
-                            "*": "=",
-                            "interval": "=:triggerSuffix:int",
-                            "frequency": "=:-freq"
-                        },
-                        "maxConcurrency": "="}}},
-            "Microsoft.Synapse/workspaces/linkedServices": {
-                "*": {
-                    "properties": {
-                        "typeProperties": {
-                            "*": "="}}},
-                "AzureDataLakeStore": {
-                    "properties": {
-                        "typeProperties": {
-                            "dataLakeStoreUri": "="}}}},
-            "Microsoft.Synapse/workspaces/datasets": {
-                "properties": {
-                    "typeProperties": {
-                        "*": "="}}}
-        }
+            "notebooks": {"properties": {"bigDataPool": {"referenceName": "="}}},
+            "sqlscripts": {"properties": {"content": {"currentConnection": {"*": "-"}}}},
+            "pipelines": {"properties": {"activities": [{"typeProperties": {"waitTimeInSeconds": "-::int","headers": "=::object"}}]}},
+            "integrationRuntimes": {"properties": {"typeProperties": {"*": "="}}},
+            "triggers": {"properties": {"typeProperties": {"recurrence": {"*": "=","interval": "=:triggerSuffix:int","frequency": "=:-freq"},"maxConcurrency": "="}}},
+            "linkedServices": {"*": {"properties": {"typeProperties": {"*": "="}}},"AzureDataLakeStore": {"properties": {"typeProperties": {"dataLakeStoreUri": "="}}}},
+            "datasets": {"properties": {"typeProperties": {"*": "="}}}
+            }
 
         return input_config_path, expected
     
@@ -225,6 +190,7 @@ class TestCases_ParameterConfig():
                     "properties": {}
                 }
             }
+
+        expected = {'notebooks': {'properties': {}}, 'sqlscripts': {'properties': {'content': {'currentConnection': {'*': '='}}}}, 'pipelines': {'properties': {'activities': [{'typeProperties': {}}], 'parameters': {'storage_name': {'type': '=', 'defaultValue': '='}}}}, 'integrationRuntimes': {'properties': {'typeProperties': {'*': '='}}}, 'triggers': {'properties': {'typeProperties': {'recurrence': {'*': '=', 'interval': '=:triggerSuffix:int', 'frequency': '=:-freq'}, 'maxConcurrency': '='}}}, 'linkedServices': {'*': {'properties': {'typeProperties': {'url': '=', 'baseUrl': '=', 'functionAppUrl': '='}}}, 'AzureDataLakeStore': {'properties': {'typeProperties': {'dataLakeStoreUri': '='}}}}, 'datasets': {'properties': {}}}
         inputs = self.save_config(input_config,directory="tmp", file_name="case_2_custom_config.json")
-        expected = input_config
         return inputs, expected
